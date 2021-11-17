@@ -1,9 +1,7 @@
 package com.chenjie.hadoopedu.hdfs;
 
 import org.apache.hadoop.conf.Configuration;
-import org.apache.hadoop.fs.FSDataOutputStream;
-import org.apache.hadoop.fs.FileSystem;
-import org.apache.hadoop.fs.Path;
+import org.apache.hadoop.fs.*;
 import org.apache.hadoop.io.IOUtils;
 import org.junit.After;
 import org.junit.Before;
@@ -48,11 +46,16 @@ public class TestHDFS {
      *<P>2021/11/17 0017 15:11
      *
      */
-//    @Test
-//    public void blocks(){
-//        Path file = new Path("");
-//
-//    }
+    @Test
+    public void blocks() throws Exception {
+        Path file = new Path("/mockingbird/out-pdf.pdf");
+        FileStatus fss = fs.getFileStatus(file);
+        BlockLocation[] fileBlockLocations = fs.getFileBlockLocations(fss, 0, fss.getLen());
+        for (BlockLocation b:fileBlockLocations){
+            System.out.println(b);
+        }
+
+    }
 
     @After
     public void close(){
