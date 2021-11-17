@@ -58,7 +58,7 @@ public class TestHDFS {
     }
 
     @After
-    public void close(){
-
+    public void close() throws Exception {
+        fs.close();
     }
 }
