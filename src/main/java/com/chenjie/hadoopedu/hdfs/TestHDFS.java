@@ -34,8 +34,8 @@ public class TestHDFS {
 
     @Test
     public void upload() throws Exception {
-        BufferedInputStream bufferedInputStream = new BufferedInputStream(new FileInputStream(new File("./data/Elasticsearch实战.pdf")));
-        Path path = new Path("/mockingbird/out-pdf.pdf");
+        BufferedInputStream bufferedInputStream = new BufferedInputStream(new FileInputStream(new File("./data/data.txt")));
+        Path path = new Path("/data/wc/input/data.txt");
         FSDataOutputStream fsDataOutputStream = fs.create(path);
         IOUtils.copyBytes(bufferedInputStream, fsDataOutputStream, conf,true);
     }
@@ -54,7 +54,11 @@ public class TestHDFS {
         for (BlockLocation b:fileBlockLocations){
             System.out.println(b);
         }
-
+        FSDataInputStream open = fs.open(file);
+        System.out.println((char)open.readByte());
+        System.out.println((char)open.readByte());
+        System.out.println((char)open.readByte());
+        System.out.println((char)open.readByte());
     }
 
     @After
